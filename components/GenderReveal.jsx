@@ -417,7 +417,7 @@ function PawButton({ onClick, leaving }) {
       onMouseUp={() => setPressed(false)}
       onMouseLeave={() => setPressed(false)}
       onClick={leaving ? undefined : onClick}
-      aria-label="Reveal the secret"
+      aria-label="Reveal the gender of the baby"
       disabled={leaving}
     >
       <span className="paw-halo" aria-hidden="true" />
@@ -468,7 +468,7 @@ function PawButton({ onClick, leaving }) {
           <ellipse cx="142" cy="78" rx="3"   ry="2"   fill="#fff" opacity="0.6" transform="rotate(20 142 78)" />
         </svg>
       </span>
-      <span className="paw-cta">Tap to reveal the secret</span>
+      <span className="paw-cta">Tap to reveal the gender</span>
     </button>
   );
 }
@@ -775,7 +775,7 @@ export default function GenderReveal() {
         <img className="scan scan--right" src="/stickers/scan-bottom.png" alt="" aria-hidden="true" />
         {stage === "trigger" && <FloatingStickers which="trigger" />}
         <div className="trigger-wrap">
-          <div className="eyebrow">a little baby secret · 2026</div>
+          <div className="eyebrow">a baby is coming in 2026</div>
           <h1 className="display title-1">
             <span className="ink">Laobai's paw</span>
             <br />
@@ -829,7 +829,7 @@ export default function GenderReveal() {
                 <span className="rt-line rt-line--big">{isBoy ? "BOY" : "GIRL"}</span>
                 <span className="rt-line rt-line--emoji">🍼👶🏻🐣💖</span>
               </h2>
-              <div className="heart-note">Our hearts are ready for you ^_^</div>
+              <div className="heart-note">We can't wait to see you ^_^</div>
             </div>
           </>
         )}
