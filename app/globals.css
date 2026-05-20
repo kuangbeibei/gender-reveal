@@ -102,7 +102,7 @@ body {
   position: absolute;
   top: 62%;
   width: clamp(180px, 22vw, 340px);
-  opacity: 0.50;
+  opacity: 0.80;
   pointer-events: none;
   user-select: none;
   z-index: 1;

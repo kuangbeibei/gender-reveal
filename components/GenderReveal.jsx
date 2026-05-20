@@ -672,14 +672,14 @@ const COUNTDOWN_FROM = 10;
 const PAW_EXIT_MS = 1500;
 const CLOUD_DURATION = 4.2; // seconds
 const SUSPEND_DURATION = 6.6; // seconds
-const SUSPEND_TEXT = "Reading the secret destiny";
+const SUSPEND_TEXT = "Reading the secret";
 
 export default function GenderReveal() {
   // Read ?result=boy|girl from the URL once on mount
   const [result, setResult] = useState(DEFAULT_RESULT);
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const v = new URLSearchParams(window.location.search).get("result");
+     const v = window.localStorage.getItem("result");
     if (v === "boy" || v === "girl") setResult(v);
   }, []);
 
@@ -743,13 +743,26 @@ export default function GenderReveal() {
         setBloom(true);
         setTimeout(() => setStage("reveal"), 700);
       }, SUSPEND_DURATION * 1000);
-      return () => clearTimeout(b);
+
+      const music = setTimeout(() => {
+          fetch("/api/play-music", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ gender: result })
+          });
+      }, SUSPEND_DURATION * 1000 - 1000);
+      return () => {
+        clearTimeout(b);
+        clearTimeout(music);
+      };
     }
-  }, [stage]);
+  }, [stage, result]);
 
   useEffect(() => {
     if (stage === "reveal") {
-      const id = setTimeout(() => setBloom(false), 1100);
+      const id = setTimeout(() => setBloom(false), 0);
       return () => clearTimeout(id);
     }
   }, [stage]);

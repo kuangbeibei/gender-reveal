@@ -12,7 +12,7 @@ export default function Page() {
       .then((data) => {
         if (data.success) {
           const mapped = data.fetalSex.toLowerCase() === "male" ? "boy" : "girl";
-          window.history.replaceState(null, "", `?result=${mapped}`);
+          window.localStorage.setItem("result", mapped);
         }
       })
       .catch(() => {})
