@@ -592,7 +592,7 @@ function Suspend({ message }) {
       i++;
       setShown(message.slice(0, i));
       if (i >= message.length) clearInterval(id);
-    }, 55);
+    }, 400);
     return () => clearInterval(id);
   }, [message]);
   return (
@@ -752,7 +752,7 @@ export default function GenderReveal() {
             },
             body: JSON.stringify({ gender: result })
           });
-      }, SUSPEND_DURATION * 1000 - 500);
+      }, SUSPEND_DURATION * 1000 - 800);
       return () => {
         clearTimeout(b);
         clearTimeout(music);

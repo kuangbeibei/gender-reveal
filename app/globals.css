@@ -442,7 +442,7 @@ body {
   letter-spacing: 0.01em;
   text-shadow: 0 2px 24px rgba(120, 80, 200, 0.5), 0 0 8px rgba(255, 220, 200, 0.3);
 }
-.caret { display: inline-block; animation: caretBlink 0.9s steps(2) infinite; color: #FFE0B8; }
+.caret { display: inline-block; animation: caretBlink 1.4s steps(2) infinite; color: #FFE0B8; }
 @keyframes caretBlink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
 /* ── BLOOM ──────────────────────────────────────────────────────────────── */
