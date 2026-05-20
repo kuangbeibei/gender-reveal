@@ -468,7 +468,7 @@ function PawButton({ onClick, leaving }) {
           <ellipse cx="142" cy="78" rx="3"   ry="2"   fill="#fff" opacity="0.6" transform="rotate(20 142 78)" />
         </svg>
       </span>
-      <span className="paw-cta">Tap to reveal the gender</span>
+      <span className="paw-cta">点我揭晓宝宝性别</span>
     </button>
   );
 }
@@ -529,7 +529,7 @@ function CosmicCloud({ exiting }) {
         </span>
       ))}
       <DnaHelix />
-      <div className="cosmic-label">Nature is at work…</div>
+      <div className="cosmic-label">生命正在自然中诞生…</div>
     </div>
   );
 }
@@ -672,7 +672,7 @@ const COUNTDOWN_FROM = 10;
 const PAW_EXIT_MS = 1500;
 const CLOUD_DURATION = 4.2; // seconds
 const SUSPEND_DURATION = 6.6; // seconds
-const SUSPEND_TEXT = "Reading the secret";
+const SUSPEND_TEXT = "即将揭晓";
 
 export default function GenderReveal() {
   // Read ?result=boy|girl from the URL once on mount
@@ -752,7 +752,7 @@ export default function GenderReveal() {
             },
             body: JSON.stringify({ gender: result })
           });
-      }, SUSPEND_DURATION * 1000 - 400);
+      }, SUSPEND_DURATION * 1000 - 500);
       return () => {
         clearTimeout(b);
         clearTimeout(music);
@@ -790,9 +790,9 @@ export default function GenderReveal() {
         <div className="trigger-wrap">
           <div className="eyebrow">a baby is coming in 2026</div>
           <h1 className="display title-1">
-            <span className="ink">Laobai's paw</span>
+            <span className="ink">老白的爪爪</span>
             <br />
-            <span className="ink ink--accent">holds the secret!</span>
+            <span className="ink ink--accent">藏有秘密!</span>
           </h1>
           <PawButton onClick={start} leaving={pawLeaving} />
           <div className="hint">let&apos;s witness this together!</div>
@@ -836,13 +836,14 @@ export default function GenderReveal() {
             <FloatingStickers which="reveal" />
             <Confetti result={result} />
             <div className="reveal-wrap">
-              <div className="reveal-eyebrow">Year of the Horse 🐎</div>
+              <div className="reveal-eyebrow">🐎 马宝宝是</div>
               <h2 className="display reveal-title">
-                <span className="rt-line rt-line--small">IT&apos;S A</span>
-                <span className="rt-line rt-line--big">{isBoy ? "BOY" : "GIRL"}</span>
+                {/* <span className="rt-line rt-line--small">宝宝是</span> */}
+                <span className="rt-line rt-line--big">{isBoy ? "男孩" : "女孩"}</span>
+                <br />
                 <span className="rt-line rt-line--emoji">🍼👶🏻🐣💖</span>
               </h2>
-              <div className="heart-note">We can't wait to see you ^_^</div>
+              <div className="heart-note">我们迫不及待想见到你 ^_^</div>
             </div>
           </>
         )}

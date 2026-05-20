@@ -139,8 +139,9 @@ body {
   color: #4a2c1a;
   letter-spacing: 0.005em;
 }
-.title-1 .ink { display: inline-block; }
+.title-1 .ink { display: inline-block; font-family: 'ZCOOL KuaiLe', sans-serif; }
 .title-1 .ink--accent {
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   background: linear-gradient(90deg, #E07B9A 0%, #C26EE3 50%, #6EA3FF 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
@@ -243,7 +244,7 @@ body {
 .paw-cta {
   position: absolute;
   bottom: -46px; left: 50%; transform: translateX(-50%);
-  font-family: "Fredoka", sans-serif;
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-weight: 600;
   font-size: 18px; letter-spacing: 0.02em;
   color: #6c3b22;
@@ -322,6 +323,7 @@ body {
 
 .cosmic-label {
   position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%);
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7); font-weight: 600;
   animation: fadeBlink 2s ease-in-out infinite;
@@ -432,7 +434,7 @@ body {
   animation: orbPulse 2.6s ease-in-out infinite;
 }
 .suspend-text {
-  font-family: "Caveat", cursive;
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-weight: 700;
   font-size: clamp(28px, 3.8vw, 44px);
   color: #F5E6FF;
@@ -488,7 +490,7 @@ body {
   z-index: 5;
 }
 .reveal-eyebrow {
-  font-family: "Caveat", cursive;
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-size: 28px; letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.92); font-weight: 700;
   text-transform: none;
@@ -501,12 +503,14 @@ body {
 }
 .rt-line { display: block; color: #fff; }
 .rt-line--small {
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-size: clamp(28px, 4vw, 52px);
   letter-spacing: 0.4em; font-weight: 400;
   opacity: 0; animation: revealUp 0.7s ease-out 0.5s forwards;
 }
 .rt-line--big {
-  font-size: clamp(120px, 18vw, 260px);
+  font-family: 'ZCOOL KuaiLe', sans-serif;
+  font-size: clamp(100px, 18vw, 260px);
   letter-spacing: 0.02em;
   opacity: 0; animation: revealBig 1s cubic-bezier(.2,.8,.2,1) 0.75s forwards;
 }
@@ -523,7 +527,7 @@ body {
 }
 .heart-note {
   margin-top: 28px;
-  font-family: "Caveat", cursive;
+  font-family: 'ZCOOL KuaiLe', sans-serif;
   font-size: 28px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.92);
