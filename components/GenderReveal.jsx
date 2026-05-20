@@ -47,8 +47,8 @@ function useHeartbeat() {
       const ctx = ensure();
       if (!ctx) return;
       const t0 = ctx.currentTime + 0.01;
-      pulse(ctx, t0, 70, 0.22, 0.55);
-      pulse(ctx, t0 + 0.2, 52, 0.28, 0.42);
+      pulse(ctx, t0, 70, 0.22, 1.4);
+      pulse(ctx, t0 + 0.2, 52, 0.28, 1.1);
     },
     [ensure]
   );
@@ -695,7 +695,7 @@ export default function GenderReveal() {
   useEffect(() => {
     const a = new Audio("/music/bgm.wav");
     a.loop = true;
-    a.volume = 0.14;
+    a.volume = 0.1;
     audioRef.current = a;
     return () => { a.pause(); a.src = ""; };
   }, []);
@@ -752,7 +752,7 @@ export default function GenderReveal() {
             },
             body: JSON.stringify({ gender: result })
           });
-      }, SUSPEND_DURATION * 1000 - 1000);
+      }, SUSPEND_DURATION * 1000 - 400);
       return () => {
         clearTimeout(b);
         clearTimeout(music);

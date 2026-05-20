@@ -35,7 +35,7 @@ export async function POST(req) {
       set sound volume to 0
       stop
       play targetTrack
-      delay 0.8
+      delay 0.3
       pause
       set player position to ${START_TIMES[gender?.trim().toLowerCase()] ?? 0}
       set sound volume to 100
