@@ -1,0 +1,8 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/lifx/route": "app/api/lifx/route.js",
+  "/api/reveal-trigger/route": "app/api/reveal-trigger/route.js",
+  "/page": "app/page.js",
+  "/remote/page": "app/remote/page.js",
+  "/api/play-music/route": "app/api/play-music/route.js"
+}
