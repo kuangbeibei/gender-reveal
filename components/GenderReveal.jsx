@@ -742,7 +742,7 @@ export default function GenderReveal() {
         setTimeout(() => setStage("reveal"), 700);
       }, SUSPEND_DURATION * 1000);
 
-      const effects = setTimeout(() => {
+      const effects = process.env.NEXT_PUBLIC_LOCAL_FEATURES ? setTimeout(() => {
         fetch("/api/lifx", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -753,7 +753,7 @@ export default function GenderReveal() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ gender: result }),
         }).catch(() => {});
-      }, SUSPEND_DURATION * 1000 - 800);
+      }, SUSPEND_DURATION * 1000 - 800) : null;
 
       return () => {
         clearTimeout(reveal);
