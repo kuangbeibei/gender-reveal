@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
    ───────────────────────────────────────────────────────────────────────── */
 
 // Change this to "boy" if you want boy to be the default.
-const DEFAULT_RESULT = "girl";
+const DEFAULT_RESULT = "girl"; // it's a girl!
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Utilities
@@ -47,8 +47,8 @@ function useHeartbeat() {
       const ctx = ensure();
       if (!ctx) return;
       const t0 = ctx.currentTime + 0.01;
-      pulse(ctx, t0, 70, 0.22, 1.4);
-      pulse(ctx, t0 + 0.2, 52, 0.28, 1.1);
+      pulse(ctx, t0, 70, 0.22, 0.45);
+      pulse(ctx, t0 + 0.2, 52, 0.28, 0.35);
     },
     [ensure]
   );
@@ -676,12 +676,7 @@ const SUSPEND_TEXT = "即将揭晓";
 
 export default function GenderReveal() {
   // Read ?result=boy|girl from the URL once on mount
-  const [result, setResult] = useState(DEFAULT_RESULT);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-     const v = window.localStorage.getItem("result");
-    if (v === "boy" || v === "girl") setResult(v);
-  }, []);
+  const result = DEFAULT_RESULT;
 
   const [stage, setStage] = useState("trigger");
   const [pawLeaving, setPawLeaving] = useState(false);
@@ -738,24 +733,31 @@ export default function GenderReveal() {
       }, CLOUD_DURATION * 1000);
       return () => { clearTimeout(a); clearTimeout(b); };
     }
+  }, [stage]);
+
+  useEffect(() => {
     if (stage === "suspend") {
-      const b = setTimeout(() => {
+      const reveal = setTimeout(() => {
         setBloom(true);
         setTimeout(() => setStage("reveal"), 700);
       }, SUSPEND_DURATION * 1000);
 
-      const music = setTimeout(() => {
-          fetch("/api/play-music", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ gender: result })
-          });
+      const effects = setTimeout(() => {
+        fetch("/api/lifx", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gender: result }),
+        }).catch(() => {});
+        fetch("/api/play-music", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gender: result }),
+        }).catch(() => {});
       }, SUSPEND_DURATION * 1000 - 800);
+
       return () => {
-        clearTimeout(b);
-        clearTimeout(music);
+        clearTimeout(reveal);
+        clearTimeout(effects);
       };
     }
   }, [stage, result]);
@@ -767,6 +769,8 @@ export default function GenderReveal() {
     }
   }, [stage]);
 
+  const startRef = useRef(null);
+
   const start = () => {
     if (pawLeaving) return;
     heartbeat.ensure();
@@ -774,6 +778,17 @@ export default function GenderReveal() {
     setPawLeaving(true);
     setTimeout(() => { setStage("cosmic"); setPawLeaving(false); }, PAW_EXIT_MS);
   };
+  startRef.current = start;
+
+  // ── SSE remote trigger ──────────────────────────────────────
+  useEffect(() => {
+    const es = new EventSource("/api/reveal-trigger");
+    es.onmessage = (e) => {
+      if (e.data === "trigger") startRef.current?.();
+    };
+    return () => es.close();
+  }, []);
+
   const restart = () => { setStage("trigger"); setBloom(false); setPawLeaving(false); };
 
   const isBoy = result === "boy";
@@ -824,7 +839,7 @@ export default function GenderReveal() {
       <section className={"scene scene--suspend " + (stage === "suspend" ? "is-in" : "is-out")}>
         <div className="bg bg--mystic" />
         <MysticStars />
-        {stage === "suspend" && <Suspend message={SUSPEND_TEXT + "…"} />}
+        {stage === "suspend" && <Suspend message={SUSPEND_TEXT + " …"} />}
       </section>
 
       {/* State 5: REVEAL */}
